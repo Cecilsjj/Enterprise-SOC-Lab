@@ -2,11 +2,13 @@
 
 ## Overview
 
-This project is a Windows-focused SOC analyst lab designed to build practical skills in Windows Event Viewer, endpoint log investigation, authentication analysis, Windows account activity review, local identity review, Splunk SIEM log ingestion, dashboarding, evidence collection, and incident response documentation.
+This project is a Windows-focused SOC analyst lab designed to build practical skills in Windows Event Viewer, endpoint log investigation, authentication analysis, Windows account activity review, local identity review, Splunk SIEM log ingestion, dashboarding, endpoint alert triage, mock ticketing, evidence collection, and incident response documentation.
 
 SOC stands for **Security Operations Center**.
 
 SIEM stands for **Security Information and Event Management**.
+
+IR stands for **Incident Response**.
 
 The purpose of this project is to expand beyond Linux-based security monitoring and develop hands-on experience with Windows and enterprise-style security operations workflows.
 
@@ -25,7 +27,9 @@ The goals of this lab are to:
 - Ingest Windows Security logs into Splunk
 - Search Windows logs using SPL
 - Create SIEM-style dashboards
-- Practice evidence collection from Windows and Splunk
+- Simulate endpoint alert triage
+- Create mock SOC tickets
+- Practice evidence collection from Windows, Splunk, and GitHub Issues
 - Document investigations clearly for a cybersecurity portfolio
 
 ---
@@ -36,11 +40,11 @@ The goals of this lab are to:
 |---|---|
 | Host Machine | Windows laptop |
 | Log Source | Windows Event Viewer |
-| Primary Logs | Security, System, Application |
+| Primary Logs | Windows Security logs |
 | SIEM Platform | Splunk Enterprise |
-| Evidence | Screenshots and copied event details |
+| Ticketing Simulation | GitHub Issues |
+| Evidence | Screenshots, copied event details, and triage notes |
 | Documentation | GitHub |
-| Future Additions | Endpoint alert triage, ticketing workflow, incident response documentation |
 
 ---
 
@@ -52,15 +56,8 @@ The goals of this lab are to:
 | 02 | Windows Account and Security Events | Logoff events, special privileges, user creation, user deletion, account lockout checks |
 | 03 | Windows Local Users, Groups, and AD Security Concepts | Local users, groups, administrator membership, enabled/disabled accounts, identity review |
 | 04 | Splunk SIEM Windows Log Ingestion and Dashboarding | Splunk installation, Windows Security log ingestion, SPL searches, EventCode counts, dashboard creation |
-
----
-
-## Planned Projects
-
-| Project | Title | Focus |
-|---:|---|---|
-| 05 | Endpoint Alert Triage | Investigating suspicious endpoint activity and documenting alert findings |
-| 06 | Mock Ticketing and Incident Response Workflow | Triage, ticket notes, severity, evidence, recommendations |
+| 05 | Endpoint Alert Triage | Suspicious account creation simulation, Event Viewer review, Splunk detection, severity, triage notes |
+| 06 | Mock Ticketing and Incident Response Workflow | GitHub Issues ticket, timeline, evidence review, resolution comment, final disposition |
 
 ---
 
@@ -80,10 +77,13 @@ This project demonstrates skills in:
 - Splunk SIEM log ingestion
 - SPL search queries
 - Dashboard creation
+- Endpoint alert triage
+- Severity classification
+- SOC ticket documentation
 - Evidence collection
 - Security documentation
-- SOC analyst workflow
-- Incident investigation fundamentals
+- Incident response workflow
+- Analyst investigation notes
 
 ---
 
@@ -91,10 +91,11 @@ This project demonstrates skills in:
 
 | Tool | Purpose |
 |---|---|
-| Windows Event Viewer | Review Windows Security, System, and Application logs |
+| Windows Event Viewer | Review Windows Security logs |
 | PowerShell | Run Windows account, group, and security investigation commands |
 | Splunk Enterprise | Ingest, search, analyze, and visualize Windows Security logs |
 | SPL | Search Processing Language used in Splunk searches |
+| GitHub Issues | Simulated SOC ticketing workflow |
 | Screenshots | Capture investigation evidence |
 | GitHub | Document portfolio projects |
 
@@ -215,13 +216,93 @@ This project demonstrated a full SIEM-style workflow: ingest logs, search data, 
 
 ---
 
+### Project 05 – Endpoint Alert Triage
+
+In Project 05, I simulated an endpoint alert involving suspicious local account creation.
+
+I created a temporary local Windows account named:
+
+```text
+alerttest
+```
+
+This generated:
+
+- Event ID 4720 – A user account was created
+
+I confirmed the alert in:
+
+- Windows Event Viewer
+- Splunk Enterprise
+
+I searched Splunk using:
+
+```spl
+index=main sourcetype="WinEventLog:Security" EventCode=4720 alerttest
+```
+
+After collecting evidence, I deleted the temporary account and confirmed the deletion event with:
+
+- Event ID 4726 – A user account was deleted
+
+I wrote SOC-style triage notes that included:
+
+- Alert name
+- Alert type
+- Endpoint
+- Detected account
+- Related Event IDs
+- Detection source
+- Severity
+- Severity reason
+- Impact
+- Response action
+- Final disposition
+- Recommendation
+
+This project demonstrated endpoint alert triage, severity classification, evidence review, and response documentation.
+
+---
+
+### Project 06 – Mock Ticketing and Incident Response Workflow
+
+In Project 06, I used GitHub Issues as a mock SOC ticketing system.
+
+I created a ticket for:
+
+```text
+SOC Ticket - Suspicious Local Account Creation - alerttest
+```
+
+The ticket documented:
+
+- Ticket summary
+- Alert details
+- Related Event IDs
+- Severity
+- Severity reason
+- Evidence reviewed
+- Timeline
+- Investigation notes
+- Response action
+- Final disposition
+- Recommendation
+
+I added a resolution comment explaining that the investigation was completed, the account creation was confirmed in Windows Security logs and Splunk, the activity was authorized lab activity, and the temporary account was deleted.
+
+I then closed the issue to simulate completing and closing a SOC ticket.
+
+This project demonstrated a basic ticketing and incident response workflow, including investigation notes, evidence-based resolution, and final disposition.
+
+---
+
 ## Why This Project Matters
 
-Many entry-level SOC analyst and security operations roles require the ability to investigate Windows endpoint activity, review authentication events, understand common Windows Event IDs, work with SIEM tools, collect evidence, and explain findings clearly.
+Many entry-level SOC analyst and security operations roles require the ability to investigate Windows endpoint activity, review authentication events, understand common Windows Event IDs, work with SIEM tools, collect evidence, document alert triage, and explain findings clearly.
 
-This project builds those skills through hands-on Windows investigations using Event Viewer, PowerShell, Splunk, screenshots, copied event evidence, and GitHub documentation.
+This project builds those skills through hands-on Windows investigations using Event Viewer, PowerShell, Splunk, GitHub Issues, screenshots, copied event evidence, and GitHub documentation.
 
-The project also connects Windows endpoint logging with SIEM-style analysis by ingesting Windows Security logs into Splunk, running SPL searches, summarizing EventCodes, and creating a dashboard for analyst review.
+The project also connects Windows endpoint logging with SIEM-style analysis by ingesting Windows Security logs into Splunk, running SPL searches, summarizing EventCodes, creating a dashboard, investigating an endpoint alert, and documenting the investigation in a mock SOC ticket.
 
 ---
 
@@ -232,36 +313,34 @@ The project also connects Windows endpoint logging with SIEM-style analysis by i
 - Event ID 4625 helps identify failed logons.
 - Logon Type helps explain how an authentication event occurred.
 - Event ID 4672 helps identify privileged logon activity.
+- Event ID 4720 helps identify user account creation.
+- Event ID 4726 helps identify user account deletion.
 - User creation and deletion events can indicate legitimate administration or suspicious account activity.
 - Local administrator membership should be reviewed because it represents elevated access.
 - Splunk can ingest Windows Security logs and make them searchable.
 - SPL can summarize event activity and help identify patterns.
 - Dashboards help turn raw logs into readable analyst views.
+- Endpoint alerts should be triaged using evidence, context, and severity.
+- Ticketing systems help track investigations from detection to resolution.
+- Final disposition should clearly explain whether activity was benign, suspicious, or malicious.
 - Evidence should be preserved using screenshots and copied event details.
 - Clear documentation is important for SOC investigations and portfolio presentation.
 
 ---
 
-## Future Additions
+## Interview Summary
 
-Future additions will include:
+I created a Windows-focused Enterprise SOC Analyst Lab to build practical experience with Windows Event Viewer, Windows Security logs, Event ID analysis, PowerShell identity review, Splunk SIEM log ingestion, SPL searches, dashboarding, endpoint alert triage, mock ticketing, evidence collection, and SOC-style documentation.
 
-- Endpoint alert triage
-- Mock ticketing workflow
-- Security incident prioritization
-- Severity classification
-- Analyst investigation notes
-- Evidence-based recommendations
-- Final incident response documentation
-- Optional Active Directory domain lab when hardware allows
-- Optional Microsoft 365 / Defender security investigation labs
+I investigated successful and failed logons, reviewed account and privilege events, created and deleted temporary local test accounts to generate Windows Security events, reviewed local users and administrator group membership, ingested Windows Security logs into Splunk, summarized events by EventCode, built a Windows Security Event Dashboard, simulated a suspicious local account creation alert, wrote triage notes, created a mock SOC ticket using GitHub Issues, added a resolution comment, and closed the ticket.
+
+This project demonstrates practical entry-level SOC analyst skills in Windows log analysis, SIEM workflow, identity review, endpoint alert triage, ticketing, evidence collection, and incident response documentation.
 
 ---
 
-## Interview Summary
+## Project Status
 
-I created a Windows-focused Enterprise SOC Analyst Lab to build practical experience with Windows Event Viewer, Windows Security logs, Event ID analysis, PowerShell identity review, Splunk SIEM log ingestion, SPL searches, dashboarding, evidence collection, and SOC-style documentation.
-
-So far, I have investigated successful and failed logons, reviewed account and privilege events, created and deleted a temporary local test account to generate Windows Security events, reviewed local users and administrator group membership, ingested Windows Security logs into Splunk, summarized events by EventCode, and built a Windows Security Event Dashboard.
-
-This project demonstrates practical entry-level SOC analyst skills in Windows log analysis, SIEM workflow, identity review, evidence collection, and technical documentation.
+```text
+Enterprise SOC Analyst Lab: Complete
+Projects completed: 6 / 6
+```
