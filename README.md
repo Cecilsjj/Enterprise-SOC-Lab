@@ -171,6 +171,10 @@ I identified:
 
 I observed a successful service logon by the SYSTEM account and failed logon activity with the reason “unknown username or bad password.”
 
+![Windows Failed Logon Investigation](screenshots/4625-failed-logon.png)
+
+Windows Event Viewer was used to investigate a failed authentication event and review the security context associated with Event ID `4625`.
+
 This project introduced Windows Event Viewer, Windows Security logs, authentication event analysis, logon types, screenshot evidence, and copied event details.
 
 ---
@@ -253,6 +257,20 @@ The dashboard included:
 
 This project demonstrated a full SIEM-style workflow: ingest logs, search data, summarize events, create dashboards, collect evidence, and document findings.
 
+#### Splunk Investigation Evidence
+
+![Splunk Windows Security Event Search](screenshots/splunk-security-events-search.png)
+
+Windows Security telemetry was ingested into Splunk and searched using SPL to review authentication, privilege, and account-related events.
+
+![Splunk EventCode Analysis](screenshots/splunk-eventcode-counts.png)
+
+EventCode aggregation was used to summarize the Windows Security events present in the dataset and identify the most frequently observed event types.
+
+![Splunk Windows Security Dashboard](screenshots/splunk-windows-security-dashboard.png)
+
+A Windows Security dashboard was created to provide an analyst-facing view of EventCode activity and recent security events.
+
 ---
 
 ### Project 05 – Endpoint Alert Triage
@@ -301,6 +319,18 @@ I wrote SOC-style triage notes that included:
 
 This project demonstrated endpoint alert triage, severity classification, evidence review, and response documentation.
 
+#### Endpoint Alert Triage Evidence
+
+![Suspicious Account Creation in Splunk](screenshots/splunk-4720-alerttest-search.png)
+
+Splunk confirmed Event ID `4720` for the creation of the temporary `alerttest` account, providing SIEM evidence for the simulated endpoint alert.
+
+![Account Deletion in Splunk](screenshots/splunk-4726-alerttest-deleted.png)
+
+After investigation and response, Splunk confirmed Event ID `4726`, showing that the `alerttest` account had been deleted.
+
+Together, these events document the alert lifecycle from suspicious account creation through investigation and remediation.
+
 ---
 
 ### Project 06 – Mock Ticketing and Incident Response Workflow
@@ -332,6 +362,24 @@ I added a resolution comment explaining that the investigation was completed, th
 I then closed the issue to simulate completing and closing a SOC ticket.
 
 This project demonstrated a basic ticketing and incident response workflow, including investigation notes, evidence-based resolution, and final disposition.
+
+#### SOC Ticket & Incident Response Evidence
+
+![SOC Incident Ticket](screenshots/github-soc-ticket-alerttest.png)
+
+The suspicious `alerttest` account activity was documented in a mock SOC ticket using GitHub Issues.
+
+The ticket captured:
+
+- Alert details
+- Severity
+- Investigation timeline
+- Evidence reviewed
+- Response action
+- Final disposition
+- Resolution documentation
+
+This completed the workflow from security-event detection through analyst triage, remediation, and documented incident closure.
 
 ---
 
