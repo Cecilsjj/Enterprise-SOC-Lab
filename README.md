@@ -1,16 +1,55 @@
 # Enterprise SOC Analyst Lab
 
-## Overview
+A Windows and Splunk-based Security Operations Center (SOC) environment focused on **security-event investigation, SIEM analysis, endpoint alert triage, and incident response workflows**.
 
-This project is a Windows-focused SOC analyst lab designed to build practical skills in Windows Event Viewer, endpoint log investigation, authentication analysis, Windows account activity review, local identity review, Splunk SIEM log ingestion, dashboarding, endpoint alert triage, mock ticketing, evidence collection, and incident response documentation.
+The project follows a practical analyst progression:
 
-SOC stands for **Security Operations Center**.
+**Windows Security Telemetry → Event Investigation → Splunk SIEM → Detection & Triage → SOC Ticket → Incident Resolution**
 
-SIEM stands for **Security Information and Event Management**.
+## Key Security Outcomes
 
-IR stands for **Incident Response**.
+- Investigated Windows authentication and account-security events in Event Viewer
+- Analyzed successful and failed logons, including Event IDs `4624` and `4625`
+- Reviewed privilege activity, local users, groups, and administrator membership
+- Ingested Windows Security logs into Splunk Enterprise
+- Used Splunk Search Processing Language (SPL) to analyze Windows security events
+- Built a Windows Security monitoring dashboard
+- Simulated suspicious local account creation and investigated Event ID `4720`
+- Verified subsequent account deletion using Event ID `4726`
+- Performed endpoint alert triage with severity, impact, evidence, and disposition
+- Created and resolved a SOC-style incident ticket using GitHub Issues
+- Preserved investigation evidence across Windows Event Viewer, Splunk, and ticketing workflows
 
-The purpose of this project is to expand beyond Linux-based security monitoring and develop hands-on experience with Windows and enterprise-style security operations workflows.
+## Investigation Highlight
+
+A controlled endpoint-security scenario simulated the creation of a suspicious local Windows account named `alerttest`.
+
+The activity was investigated across multiple sources:
+
+```text
+Suspicious Account Creation
+          |
+          v
+Windows Event ID 4720
+          |
+          v
+Splunk SIEM Detection
+          |
+          v
+Endpoint Alert Triage
+          |
+          v
+Account Deletion - Event ID 4726
+          |
+          v
+SOC Ticket & Final Disposition
+```
+
+This workflow demonstrates how a security event can move from raw endpoint telemetry through SIEM investigation, analyst triage, response action, and documented incident closure.
+
+## Technology Stack
+
+`Windows Security Logs` · `Event Viewer` · `Splunk Enterprise` · `SPL` · `PowerShell` · `Windows Local Accounts` · `GitHub Issues` · `MITRE ATT&CK`
 
 ---
 
