@@ -85,6 +85,74 @@ The goals of this lab are to:
 | Evidence | Screenshots, copied event details, and triage notes |
 | Documentation | GitHub |
 
+--- 
+
+## SOC Investigation Architecture
+
+The Enterprise SOC Lab follows an analyst workflow that moves Windows endpoint telemetry through investigation, SIEM analysis, triage, response, and incident documentation.
+
+```text
+Windows Endpoint
+      |
+      | Windows Security Events
+      v
+Windows Event Viewer
+      |
+      | Event IDs / Authentication / Account Activity
+      v
+Splunk Enterprise
+      |
+      | SPL Search & Event Analysis
+      v
+Security Investigation
+      |
+      | Detection Context / Evidence / Severity
+      v
+Endpoint Alert Triage
+      |
+      | Response Action
+      v
+SOC Ticket
+      |
+      | Investigation Notes / Disposition
+      v
+Incident Closure
+```
+
+### Security Data Flow
+
+```text
+Windows Security Logs
+        |
+        +-- Event ID 4624  Successful Logon
+        +-- Event ID 4625  Failed Logon
+        +-- Event ID 4672  Special Privileges
+        +-- Event ID 4720  Account Created
+        +-- Event ID 4726  Account Deleted
+        +-- Event ID 4798  Group Membership Enumerated
+        |
+        v
+Splunk SIEM
+        |
+        +-- SPL Investigation
+        +-- EventCode Aggregation
+        +-- Security Dashboard
+        |
+        v
+Analyst Triage
+        |
+        +-- Evidence Review
+        +-- Severity Assessment
+        +-- Impact Analysis
+        +-- Response Action
+        +-- Final Disposition
+        |
+        v
+SOC Ticket & Incident Documentation
+```
+
+This architecture demonstrates how endpoint events can be transformed from raw Windows telemetry into searchable SIEM data, analyst investigation, response actions, and documented incident closure.
+
 ---
 
 ## Completed Projects
