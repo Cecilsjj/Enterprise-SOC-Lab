@@ -511,7 +511,6 @@ This project demonstrates practical entry-level SOC analyst skills in Windows lo
 
 ## Project Status
 
-```text
-Enterprise SOC Analyst Lab: Complete
-Projects completed: 6 / 6
-```
+**Status: Complete**
+
+The Enterprise SOC Lab documents a completed Windows and Splunk security-operations workflow covering endpoint telemetry, Windows event investigation, SIEM analysis, alert triage, remediation, ticketing, evidence collection, and incident closure.
