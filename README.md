@@ -4,7 +4,7 @@ A Windows and Splunk-based Security Operations Center (SOC) environment focused 
 
 The project follows a practical analyst progression:
 
-**Windows Security Telemetry → Event Investigation → Splunk SIEM → Detection & Triage → SOC Ticket → Incident Resolution**
+**Windows Security Telemetry → Event Investigation → Splunk SIEM → Detection & Triage → SOC Ticket → Incident Resolution** 
 
 ## Key Security Outcomes
 
