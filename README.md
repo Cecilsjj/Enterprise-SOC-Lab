@@ -399,6 +399,22 @@ After investigation and response, Splunk confirmed Event ID `4726`, showing that
 
 Together, these events document the alert lifecycle from suspicious account creation through investigation and remediation.
 
+#### MITRE ATT&CK Mapping
+
+The suspicious local account creation behavior was mapped to MITRE ATT&CK based on the Windows Security telemetry collected during the investigation.
+
+| Observed Behavior | Tactic | Technique | Technique ID | Evidence | Confidence |
+|---|---|---|---|---|---|
+| Local Windows account creation | Persistence | Create Account: Local Account | `T1136.001` | Event ID `4720` | HIGH |
+
+**Mapping rationale:**
+
+- **T1136.001 — Create Account: Local Account:** Windows Security Event ID `4720` directly confirmed creation of the local `alerttest` account. Local account creation can be used by an adversary to establish persistent access to a compromised system.
+- The subsequent Event ID `4726` confirmed that the account was deleted during the response phase. This is treated as a **remediation action**, not as an additional ATT&CK technique.
+- No additional ATT&CK techniques are assigned because the available telemetry does not demonstrate that `alerttest` was used for authentication, privilege escalation, lateral movement, or other adversary activity.
+
+This approach separates **directly observed behavior** from unsupported assumptions and keeps the ATT&CK mapping aligned with the available evidence.
+
 ---
 
 ### Project 06 – Mock Ticketing and Incident Response Workflow
